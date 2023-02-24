@@ -6,7 +6,7 @@ render = function
 render(){
     const thisBooksList = this
 
-    for(let book of thisBooksList){
+    for(let book of thisBooksList.data){
     /* generate HTML based on template */
      const generatedHTML = templates.bookTemplate({
         id: book.id,
@@ -34,24 +34,24 @@ initActions(){
 const thisBooksList = this
 
 favoriteBooks = []
-
-for(let book of thisBooksList){
+    
     thisBooksList.bookContainer.addEventListener('dbclick', function(event){
         event.preventDefault()
 
-        bookId = thisBooksList.getAttribute('data-id')
+        const image = event.target.offsetParent
+        bookId = image.getAttribute('data-id')
     
         if(!book.favoriteBooks.includes(bookId)){
-            thisBooksList.classList.add('favorite')
+            image.classList.add('favorite')
             thisBooksList.favoriteBooks.push(bookId)
         }
         else {
-            thisBooksList.classList.remove('favorite')
+            image.classList.remove('favorite')
             const indexOfBooks = favoriteBooks.indexOf(bookId)
             thisBooksList.favoriteBooks.splice(indexOfBooks, 1)
         }
     })
-}
+
 }
 
 render()
