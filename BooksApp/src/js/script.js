@@ -51,8 +51,52 @@ favoriteBooks = []
             thisBooksList.favoriteBooks.splice(indexOfBooks, 1)
         }
     })
+    console.log('favorite books', favoriteBooks)
 
+    const booksFilter = document.querySelector(select.containerOf.filters)
+    booksFilter.addEventListener('click', function(callback){
+        const clickedElement = callback.target
+            if(clickedElement.tagName == 'INPUT' && clickedElement.type == 'checkbox' && clickedElement.name == 'filter'){
+                console.log(value, 'value')
+            }
+            if(clickedElement.input == 'checked'){
+                thisBooksList.filters.push(clickedElement.value)
+            }
+            else {
+                const indexOfFilters = filters.indexOf(clickedElement.value)
+                thisBooksList.filters.splice(indexOfFilters, 1)
+            }
+        })
+
+        
+    }
+
+filterBooks = function
+
+filterBooks(){
+    const thisBooksList = this
+      
+    for(let book of dataSource.books){
+        let shouldBeHidden = false
+        const bookImage = document.querySelector(select.containerOf.images + '[data-id = "' + book.id + '"]')
+        for(let filter of thisBooksList.filters){
+            if(!book.details){
+                shouldBeHidden = true 
+                break
+            }
+            if(shouldBeHidden = true){
+                
+                bookImage.classList.add('hidden')
+            }
+            else{
+                bookImage.classList.remove('hidden')
+            }
+        }
+    }
 }
+
+filters = []
+
 
 render()
 
