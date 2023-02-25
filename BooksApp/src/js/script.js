@@ -1,7 +1,31 @@
 {
 'use strict'
 
-render = function
+class BookList {
+    constructor(){
+        const thisBooksList = this
+        thisBooksList.initData()
+        thisBooksList.getElements()
+        thisBooksList.render()
+        thisBooksList.initActions()
+        thisBooksList.filterBooks()
+        thisBooksList.determineRatingBgc(rating)
+    }
+
+initData() {
+    const thisBooksList = this
+    this.data = dataSource.books;
+    thisBooksList.favoriteBooks = []
+    thisBooksList.filters = []
+}
+
+getElements(){
+const thisBooksList = this
+const bookContainer = document.querySelector(select.containerOf.book);
+console.log('bookContainer', bookContainer)
+const booksFilter = document.querySelector(select.containerOf.filters)
+const bookImage = document.querySelector(select.containerOf.images + '[data-id = "' + book.id + '"]')
+}    
 
 render(){
     const thisBooksList = this
@@ -20,8 +44,7 @@ render(){
      /* Create element using utilis.createElementFromHTML */
      thisBooksList.element = utils.createDOMFromHTML(generatedHTML);
      /* Find container of book */
-     const bookContainer = document.querySelector(select.containerOf.book);
-      console.log('bookContainer', bookContainer)
+     
      /* add element to book container */ 
      bookContainer.appendChild(thisBooksList.element);
     
@@ -30,13 +53,8 @@ render(){
     }
 }
 
-initActions = function
-
-
 initActions(){
 const thisBooksList = this
-
-favoriteBooks = []
     
     thisBooksList.bookContainer.addEventListener('dbclick', function(event){
         event.preventDefault()
@@ -56,7 +74,7 @@ favoriteBooks = []
     })
     console.log('favorite books', favoriteBooks)
 
-    const booksFilter = document.querySelector(select.containerOf.filters)
+   
     booksFilter.addEventListener('click', function(callback){
         const clickedElement = callback.target
             if(clickedElement.tagName == 'INPUT' && clickedElement.type == 'checkbox' && clickedElement.name == 'filter'){
@@ -69,19 +87,15 @@ favoriteBooks = []
                 const indexOfFilters = filters.indexOf(clickedElement.value)
                 thisBooksList.filters.splice(indexOfFilters, 1)
             }
-        })
-
-        
+        })       
     }
-
-filterBooks = function
 
 filterBooks(){
     const thisBooksList = this
       
     for(let book of dataSource.books){
         let shouldBeHidden = false
-        const bookImage = document.querySelector(select.containerOf.images + '[data-id = "' + book.id + '"]')
+       
         for(let filter of thisBooksList.filters){
             if(!book.details[filter]){
                 shouldBeHidden = true 
@@ -97,10 +111,6 @@ filterBooks(){
         }
     }
 }
-
-filters = []
-
-determineRatingBgc = function
 
 determineRatingBgc(rating){
     let background = '';
@@ -119,10 +129,8 @@ determineRatingBgc(rating){
     }
     return background
 }
+}
 
-
-render()
-
-initActions()
+const app = new BooksList();
 
 }
