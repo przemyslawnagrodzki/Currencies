@@ -1,7 +1,15 @@
 {
 'use strict'
 
-class BookList {
+const select = {
+    containerOf: {
+        book: '.book-list',
+        filters: '.filters',
+        images: '.book__image'
+    },
+}
+
+class BooksList {
     constructor(){
         const thisBooksList = this
         thisBooksList.initData()
